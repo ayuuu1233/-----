@@ -1,4 +1,3 @@
-# -----
 # 🎮 Online Gaming Café  
 
 Welcome to the **Online Gaming Café** — a cozy virtual café where you can chill, play mini-games, earn XP & coins, and customize your avatar.  

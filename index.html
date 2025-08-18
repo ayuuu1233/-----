@@ -1,190 +1,108 @@
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kawaii Gaming Café ☕🎮</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>Online Gaming Café v1.0 ☕🎮</title>
   <style>
-    :root {
-      --bg: #0f0e11;
-      --panel: #17151b;
-      --panel-2: #1f1b24;
-      --accent: #e9b86e;
-      --accent-2: #9ad0ec;
-      --text: #f5efe6;
-      --muted: #bfb8ad;
-      --good: #78e08f;
-      --bad: #ff6b6b;
-      --glow: 0 0 30px rgba(233,184,110,0.35);
+    :root{
+      --bg:#0e0c11;--panel:#18141e;--panel2:#221d27;--text:#f5efe6;--muted:#bfb8ad;--a:#e9b86e;--b:#9ad0ec;--bad:#ff6b6b;--good:#78e08f
     }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--text);
-      background: radial-gradient(1200px 800px at 10% -10%, #2a2335 0%, transparent 70%),
-                  radial-gradient(1000px 700px at 100% 0%, #1c1a23 0%, transparent 60%),
-                  var(--bg);
-      overflow: hidden;
-    }/* Header */
-header {
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  position: relative;
-  z-index: 3;
-}
-header .title {
-  display: flex; align-items: center; gap: 12px;
-  font-weight: 800; letter-spacing: 0.4px;
-}
-.badge { padding: 4px 8px; background: #2a2335; border-radius: 999px; font-size: 12px; color: var(--muted); }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;color:var(--text);font-family:ui-rounded,system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans";background:radial-gradient(1400px 900px at 10% -10%,#2a2335 0%,transparent 70%),radial-gradient(1000px 700px at 100% 0%,#1c1a23 0%,transparent 60%),var(--bg);}
+    header{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid rgba(255,255,255,.07);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,0));position:sticky;top:0;z-index:5}
+    .title{display:flex;gap:10px;align-items:center}
+    .badge{padding:4px 8px;border-radius:999px;background:#2a2335;color:var(--muted);font-size:12px}
+    .layout{display:grid;gap:12px;padding:12px;height:calc(100% - 64px);grid-template-columns:320px 1fr 340px}
+    @media (max-width: 980px){.layout{grid-template-columns:1fr; height:auto}}
+    .panel{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden}
+    .section{padding:14px}
+    h3{margin:0 0 10px;font-size:14px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+    .left,.right{display:grid;grid-auto-rows:min-content;gap:12px}
+    .row{display:flex;gap:8px;align-items:center}
+    .btn{cursor:pointer;background:#2b2532;border:1px solid rgba(255,255,255,.09);color:var(--text);padding:10px 12px;border-radius:12px;font-weight:700}
+    .btn.primary{background:linear-gradient(180deg,#3a2f3f,#2a2332);border-color:rgba(233,184,110,.5);box-shadow:0 0 14px rgba(233,184,110,.25) inset}
+    .btn[disabled]{opacity:.5;cursor:not-allowed}
+    input.btn,select.btn{font-weight:600}
+    .progress{height:8px;background:#2a2335;border-radius:999px;overflow:hidden}
+    .progress>span{display:block;height:100%;background:linear-gradient(90deg,var(--a),#f3d199)}
+    .small{font-size:12px;color:var(--muted)}/* lobby */
+.tabs{display:flex;gap:8px;padding:12px;border-bottom:1px solid rgba(255,255,255,.07)}
+.tab{padding:10px 14px;border-radius:999px;background:#221c27;border:1px solid rgba(255,255,255,.06);cursor:pointer;font-weight:800;color:var(--muted)}
+.tab.active{background:#2c2431;color:var(--text);border-color:rgba(233,184,110,.45)}
+.content{height:100%;overflow:auto}
+.grid{padding:12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width: 1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width: 680px){.grid{grid-template-columns:1fr}}
+.card{background:#221d27;border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:140px 1fr}
+.thumb{background:radial-gradient(600px 200px at 10% 10%,rgba(233,184,110,.25),transparent),linear-gradient(180deg,#2a2335,#1b1620);position:relative}
+.thumb .emoji{position:absolute;inset:0;display:grid;place-items:center;font-size:60px}
+.meta{padding:12px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px}
+.pill{padding:4px 10px;border-radius:999px;background:#2b2432;border:1px solid rgba(255,255,255,.06)}
 
-/* Layout */
-.layout {
-  display: grid;
-  grid-template-columns: 320px 1fr 340px;
-  grid-template-rows: 1fr;
-  height: calc(100% - 64px);
-  gap: 12px;
-  padding: 12px;
-}
-
-.panel {
-  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 18px;
-  box-shadow: var(--glow);
-  overflow: hidden;
-}
-
-.left, .right { display: grid; grid-auto-rows: min-content; gap: 12px; }
-
-.section { padding: 14px; }
-.section h3 { margin: 0 0 10px; font-size: 14px; color: var(--muted); letter-spacing: .6px; text-transform: uppercase; }
-
-/* Avatar Card */
-.avatar-card { display: grid; grid-template-columns: 96px 1fr; gap: 12px; align-items: center; }
-.avatar {
-  width: 96px; height: 96px; border-radius: 16px; position: relative; background: #241f2c; border:1px solid rgba(255,255,255,0.08);
-}
-.avatar .face { position:absolute; inset:0; display:grid; place-items:center; font-size:48px; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
-.kv { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; }
-.kv div { padding: 8px; background: #211c27; border:1px solid rgba(255,255,255,0.06); border-radius: 12px; }
-.progress { height: 8px; background: #2a2335; border-radius: 999px; overflow: hidden; }
-.progress > span { display:block; height:100%; background: linear-gradient(90deg, var(--accent), #f3d199); }
-
-.row { display:flex; gap:8px; align-items:center; }
-.row > * { flex:1; }
-.btn { cursor: pointer; background: #2b2532; border:1px solid rgba(255,255,255,0.08); color: var(--text); padding:10px 12px; border-radius:12px; font-weight:600; transition:.2s transform, .2s filter; }
-.btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
-.btn.primary { background: linear-gradient(180deg, #3a2f3f, #2a2332); border-color: rgba(233,184,110,0.5); box-shadow: 0 0 18px rgba(233,184,110,0.25) inset; }
-.btn.ghost { background: #1f1a24; }
-
-/* Café Lobby */
-.tabs { display:flex; gap:8px; padding: 12px; border-bottom:1px solid rgba(255,255,255,.06); position: sticky; top:0; background: linear-gradient(180deg, rgba(20,16,24,.92), rgba(20,16,24,.7)); backdrop-filter: blur(6px); z-index:2; }
-.tab { padding:10px 14px; border-radius: 999px; background:#221c27; border:1px solid rgba(255,255,255,.06); cursor:pointer; font-weight:700; font-size:14px; color: var(--muted); }
-.tab.active { background: #2c2431; color: var(--text); border-color: rgba(233,184,110,.45); box-shadow: var(--glow); }
-
-.content { height: 100%; overflow: auto; }
-.grid { padding: 12px; display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px; }
-@media (min-width: 1100px) {
-  .grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
-}
-.card { background:#221d27; border:1px solid rgba(255,255,255,.06); border-radius:16px; overflow:hidden; display:grid; grid-template-rows: 140px 1fr; }
-.thumb { background: radial-gradient(600px 200px at 10% 10%, rgba(233,184,110,.25), transparent), linear-gradient(180deg, #2a2335, #1b1620); position:relative; }
-.thumb canvas, .thumb .emoji { position:absolute; inset:0; display:grid; place-items:center; font-size:60px; }
-.card .meta { padding: 12px; display:grid; align-items:center; grid-template-columns: 1fr auto; gap:8px; }
-.tag { font-size: 12px; color: var(--muted); padding:4px 8px; background:#2b2432; border:1px solid rgba(255,255,255,.06); border-radius:999px; }
-
-/* Right column sections */
-.missions li { display:flex; justify-content:space-between; align-items:center; gap:8px; padding:10px; background:#221d27; border:1px solid rgba(255,255,255,.06); border-radius:12px; margin-bottom:8px; }
-.missions .done { opacity:.6; text-decoration: line-through; }
-
-.chat { display:grid; grid-template-rows: 1fr auto; height: 360px; }
-.chat-log { overflow:auto; padding: 12px; display:grid; gap:8px; }
-.msg { background:#231e28; border:1px solid rgba(255,255,255,.06); padding:10px 12px; border-radius: 12px; max-width: 80%; }
-.msg.me { background:#2b2532; margin-left:auto; border-color: rgba(233,184,110,.35); }
-
-/* Modal */
-.modal-backdrop { position: fixed; inset:0; background: rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index: 50; }
-.modal { width: min(940px, 96vw); height: min(640px, 92vh); background:#1f1a24; border:1px solid rgba(255,255,255,.1); border-radius: 16px; overflow: hidden; display:grid; grid-template-rows: 56px 1fr; }
-.modal header { height:56px; }
-.modal .canvas-wrap { position:relative; display:grid; place-items:center; background:#151219; }
-.modal .toolbar { position:absolute; top:8px; right:8px; display:flex; gap:8px; }
-
-/* Tiny helpers */
-.small { font-size: 12px; color: var(--muted); }
-.pill { padding:4px 10px; border-radius:999px; background:#2b2432; border:1px solid rgba(255,255,255,.06); }
-.hidden { display:none !important; }
+/* modal */
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:50}
+.modal{width:min(960px,96vw);height:min(670px,94vh);background:#1f1a24;border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:56px 1fr}
+.modal header{height:56px}
+.canvas-wrap{position:relative;display:grid;place-items:center;background:#151219}
+.toolbar{position:absolute;top:8px;right:8px;display:flex;gap:8px}
+canvas{touch-action:none}
 
   </style>
 </head>
 <body>
   <header>
     <div class="title">
-      <span style="font-size:24px">☕🎮</span>
+      <div style="font-size:24px">☕🎮</div>
       <div>
-        <div style="font-size:18px; font-weight:900">Kawaii Gaming Café</div>
+        <div style="font-size:18px;font-weight:900">Online Gaming Café</div>
         <div class="small">Lo‑fi vibes • Mini‑games • XP • Avatars</div>
       </div>
-      <span class="badge">Beta</span>
+      <span class="badge">v1.0</span>
     </div>
     <div class="row" style="max-width:520px">
-      <button class="btn ghost" id="toggleAmbience">🌧️ Rain</button>
-      <button class="btn ghost" id="toggleLofi">🎵 Lo‑fi</button>
+      <button class="btn" id="toggleAmb">🌧️ Rain</button>
+      <button class="btn" id="toggleLofi">🎵 Lo‑fi</button>
       <button class="btn primary" id="saveBtn">💾 Save</button>
     </div>
   </header>  <div class="layout">
-    <!-- LEFT COLUMN -->
+    <!-- left -->
     <div class="left">
       <div class="panel section">
         <h3>My Avatar</h3>
-        <div class="avatar-card">
-          <div class="avatar" id="avatarBox">
-            <div class="face" id="avatarFace">(•‿•)</div>
-          </div>
-          <div>
-            <div class="kv">
-              <div><b id="playerName">Player</b><br><span class="small">Level <span id="level">1</span></span></div>
-              <div><b id="coins">0</b> coins<br><span class="small">Cafe currency</span></div>
+        <div class="row" style="align-items:stretch">
+          <div id="avatarBox" style="width:96px;height:96px;border-radius:16px;background:#241f2c;border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;font-size:48px;">😊</div>
+          <div style="flex:1">
+            <div class="row" style="gap:8px">
+              <div style="flex:1"><b id="playerName">Player</b><div class="small">Level <span id="level">1</span></div></div>
+              <div class="pill"><b id="coins">0</b> coins</div>
             </div>
-            <div style="margin-top:8px">
-              <div class="progress"><span id="xpBar" style="width: 0%"></span></div>
-              <div class="small" style="margin-top:6px">XP: <span id="xp">0</span>/<span id="xpNext">100</span></div>
-            </div>
+            <div class="progress" style="margin-top:8px"><span id="xpBar" style="width:0%"></span></div>
+            <div class="small" style="margin-top:6px">XP: <span id="xp">0</span>/<span id="xpNext">100</span></div>
           </div>
         </div>
-        <div class="row" style="margin-top:10px">
-          <input id="nameInput" class="btn" placeholder="Enter nickname" />
-          <button class="btn primary" id="applyName">Set</button>
+        <div class="row" style="margin-top:8px">
+          <input id="nameInput" class="btn" placeholder="Enter nickname"/>
+          <button id="applyName" class="btn primary">Set</button>
         </div>
         <div class="row" style="margin-top:8px">
           <select id="faceSelect" class="btn">
-            <option>(•‿•)</option>
-            <option>(≧◡≦)</option>
-            <option>(˵ •̀ ᴗ - ˵ ) ✧</option>
-            <option>UwU</option>
-            <option>(╯✧▽✧)╯</option>
+            <option>😊</option><option>😎</option><option>🥳</option><option>😺</option><option>(˵ •̀ ᴗ - ˵ ) ✧</option>
           </select>
-          <input type="color" id="faceColor" class="btn" value="#ffd1a5" />
+          <input type="color" id="faceColor" class="btn" value="#ffd1a5"/>
         </div>
         <div class="row" style="margin-top:8px">
-          <button class="btn" id="toggleFairy">✨ Fairy Lights</button>
-          <button class="btn" id="togglePlant">🪴 Plant</button>
+          <button id="decorGlow" class="btn">✨ Glow</button>
+          <button id="decorPlant" class="btn">🪴 Plant</button>
         </div>
       </div><div class="panel section">
     <h3>Quick Tips</h3>
-    <div class="small">• Play games to earn XP & coins. Level up to unlock avatar vibes.<br>• Daily Café Quests give bonus coins.<br>• Use <b>Save</b> to store your progress in this browser.</div>
+    <div class="small">• Play games to earn XP & coins • Use Save to store your progress • Reach Lv 3 to unlock the surprise game</div>
   </div>
 </div>
 
-<!-- CENTER COLUMN / LOBBY -->
-<div class="panel" style="display:grid; grid-template-rows: auto 1fr;">
+<!-- center -->
+<div class="panel" style="display:grid;grid-template-rows:auto 1fr">
   <div class="tabs">
     <div class="tab active" data-tab="lobby">Lobby</div>
     <div class="tab" data-tab="leaderboard">Leaderboard</div>
@@ -193,604 +111,145 @@ header .title {
   </div>
   <div class="content" id="tab-lobby">
     <div class="grid">
-      <!-- Game Cards -->
-      <div class="card">
-        <div class="thumb"><div class="emoji">❌⭕</div></div>
-        <div class="meta">
-          <div>
-            <div style="font-weight:800">Tic‑Tac‑Toe (vs. AI)</div>
-            <div class="small">Win streak = bonus XP</div>
-          </div>
-          <button class="btn primary" data-open="game-ttt">Play</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="thumb"><div class="emoji">🟩🐍</div></div>
-        <div class="meta">
-          <div>
-            <div style="font-weight:800">Snake</div>
-            <div class="small">Classic. Don’t bite yourself!</div>
-          </div>
-          <button class="btn primary" data-open="game-snake">Play</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="thumb"><div class="emoji">🃏🧠</div></div>
-        <div class="meta">
-          <div>
-            <div style="font-weight:800">Memory Flip</div>
-            <div class="small">Match pairs, speed matters</div>
-          </div>
-          <button class="btn primary" data-open="game-memory">Play</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="thumb"><div class="emoji">🚀👾</div></div>
-        <div class="meta">
-          <div>
-            <div style="font-weight:800">Space Shooter</div>
-            <div class="small">Arrow keys + Space</div>
-          </div>
-          <button class="btn primary" data-open="game-space">Play</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="thumb"><div class="emoji">♟️🤝</div></div>
-        <div class="meta">
-          <div>
-            <div style="font-weight:800">Local Chess (Beta)</div>
-            <div class="small">Pass‑and‑play</div>
-          </div>
-          <button class="btn" disabled>Soon</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="thumb"><div class="emoji">🎁✨</div></div>
-        <div class="meta">
-          <div>
-            <div style="font-weight:800">Surprise Mini‑Game</div>
-            <div class="small">Unlock at Level 3</div>
-          </div>
-          <button class="btn" id="secretBtn">Locked</button>
-        </div>
-      </div>
-
+      <div class="card"><div class="thumb"><div class="emoji">❌⭕</div></div><div class="meta"><div><b>Tic‑Tac‑Toe (AI)</b><div class="small">Beat the bot</div></div><button class="btn primary" data-open="ttt">Play</button></div></div>
+      <div class="card"><div class="thumb"><div class="emoji">🐍</div></div><div class="meta"><div><b>Snake</b><div class="small">Classic</div></div><button class="btn primary" data-open="snake">Play</button></div></div>
+      <div class="card"><div class="thumb"><div class="emoji">🃏</div></div><div class="meta"><div><b>Memory Flip</b><div class="small">Match pairs</div></div><button class="btn primary" data-open="memory">Play</button></div></div>
+      <div class="card"><div class="thumb"><div class="emoji">🚀</div></div><div class="meta"><div><b>Space Shooter</b><div class="small">Arrows + Space</div></div><button class="btn primary" data-open="space">Play</button></div></div>
+      <div class="card"><div class="thumb"><div class="emoji">🕊️</div></div><div class="meta"><div><b>Flappy Café</b><div class="small">Tap/Space to flap</div></div><button class="btn primary" data-open="flappy">Play</button></div></div>
+      <div class="card"><div class="thumb"><div class="emoji">🎁</div></div><div class="meta"><div><b>Surprise Mini‑Game</b><div class="small">Unlock at Lv 3</div></div><button id="secretBtn" class="btn">Locked</button></div></div>
     </div>
   </div>
-  <div class="content hidden" id="tab-leaderboard">
-    <div class="section">
-      <h3>Top Players (Local)</h3>
-      <div id="lbList" class="small">No data yet. Play games to enter the leaderboard!</div>
-    </div>
-  </div>
-  <div class="content hidden" id="tab-missions">
-    <div class="section">
-      <h3>Daily Café Quests</h3>
-      <ul id="missionList" class="missions"></ul>
-      <div class="small">Quests reset daily. Completing all grants a bonus chest!</div>
-    </div>
-  </div>
+  <div class="content hidden" id="tab-leaderboard"><div class="section"><h3>Top Players (Local)</h3><div id="lbList" class="small">No data yet.</div></div></div>
+  <div class="content hidden" id="tab-missions"><div class="section"><h3>Daily Café Quests</h3><ul id="missionList" class="section" style="padding:0"></ul><div class="small">Quests reset daily.</div></div></div>
   <div class="content hidden" id="tab-chat">
-    <div class="section chat">
-      <div id="chatLog" class="chat-log panel">
-        <!-- messages render here -->
-      </div>
-      <div class="row">
-        <input id="chatInput" class="btn" placeholder="Say something…" />
-        <button id="sendMsg" class="btn primary">Send</button>
-      </div>
-      <div class="small" style="margin-top:6px">Note: This is a local cozy corner — messages aren’t uploaded anywhere.</div>
+    <div class="section" style="display:grid;grid-template-rows:1fr auto;gap:8px;height:420px">
+      <div id="chatLog" class="panel" style="overflow:auto;padding:12px;display:grid;gap:8px"></div>
+      <div class="row"><input id="chatInput" class="btn" placeholder="Say something…"/><button id="sendMsg" class="btn primary">Send</button></div>
+      <div class="small">Local cozy corner — messages stay in your browser.</div>
     </div>
   </div>
 </div>
 
-<!-- RIGHT COLUMN -->
+<!-- right -->
 <div class="right">
-  <div class="panel section">
-    <h3>Café Ambience</h3>
-    <div class="row">
-      <div class="btn" id="themeWarm">☕ Warm</div>
-      <div class="btn" id="themeCool">🧊 Cool</div>
-      <div class="btn" id="themeSakura">🌸 Sakura</div>
-    </div>
-    <div class="row" style="margin-top:8px">
-      <div class="btn" id="toggleGlow">💡 Soft Glow</div>
-      <div class="btn" id="toggleRainFx">🌧️ Window Rain FX</div>
-    </div>
-  </div>
-
-  <div class="panel section">
-    <h3>Patch Notes</h3>
-    <div class="small">
-      • v0.9 — Initial public beta with 4 games, XP/coins, quests, avatar vibes, lo‑fi & rain ambience.<br>
-      • Upcoming — Online multiplayer, cloud sync, chess engine, surprise mini‑game.
-    </div>
-  </div>
+  <div class="panel section"><h3>Café Ambience</h3><div class="row"><button class="btn" id="themeWarm">☕ Warm</button><button class="btn" id="themeCool">🧊 Cool</button><button class="btn" id="themeSakura">🌸 Sakura</button></div><div class="row" style="margin-top:8px"><button class="btn" id="toggleGlow">💡 Soft Glow</button><button class="btn" id="toggleRainFx">🌧️ Window Rain FX</button></div></div>
+  <div class="panel section"><h3>Patch Notes</h3><div class="small">v1.0 — Added Flappy Café, improved mobile support, pause/restart controls, better XP & missions.</div></div>
 </div>
 
-  </div>  <!-- GAME MODALS -->  <div class="modal-backdrop" id="game-ttt">
-    <div class="modal">
-      <header>
-        <div class="title"><span>❌⭕</span><div>Tic‑Tac‑Toe (vs. AI)</div></div>
-        <div class="row"><button class="btn" data-close>Close</button></div>
-      </header>
-      <div class="canvas-wrap">
-        <div class="toolbar">
-          <span class="pill" id="tttStatus">Your turn</span>
-          <button class="btn" id="tttReset">Reset</button>
-        </div>
-        <div id="tttBoard" style="display:grid; grid-template-columns: repeat(3, 120px); gap:8px"></div>
-      </div>
-    </div>
-  </div>  <div class="modal-backdrop" id="game-snake">
-    <div class="modal">
-      <header>
-        <div class="title"><span>🐍</span><div>Snake</div></div>
-        <div class="row"><button class="btn" data-close>Close</button></div>
-      </header>
-      <div class="canvas-wrap">
-        <div class="toolbar">
-          <span class="pill" id="snakeScore">Score: 0</span>
-          <button class="btn" id="snakeReset">Restart</button>
-        </div>
-        <canvas id="snakeCanvas" width="420" height="420" style="background:#0f0e11; border:1px solid rgba(255,255,255,.1); border-radius:12px"></canvas>
-      </div>
-    </div>
-  </div>  <div class="modal-backdrop" id="game-memory">
-    <div class="modal">
-      <header>
-        <div class="title"><span>🃏</span><div>Memory Flip</div></div>
-        <div class="row"><button class="btn" data-close>Close</button></div>
-      </header>
-      <div class="canvas-wrap">
-        <div class="toolbar">
-          <span class="pill" id="memStatus">Find all pairs!</span>
-          <button class="btn" id="memReset">Shuffle</button>
-        </div>
-        <div id="memGrid" style="display:grid; grid-template-columns: repeat(6, 80px); gap:8px"></div>
-      </div>
-    </div>
-  </div>  <div class="modal-backdrop" id="game-space">
-    <div class="modal">
-      <header>
-        <div class="title"><span>🚀</span><div>Space Shooter</div></div>
-        <div class="row"><button class="btn" data-close>Close</button></div>
-      </header>
-      <div class="canvas-wrap">
-        <div class="toolbar">
-          <span class="pill" id="spaceScore">Score: 0</span>
-          <button class="btn" id="spaceReset">Restart</button>
-        </div>
-        <canvas id="spaceCanvas" width="760" height="440" style="background: radial-gradient(600px 300px at 50% 20%, #251f2f, #0b0a0e)"></canvas>
-      </div>
-    </div>
-  </div>  <script>
-    /*************************
-     * Simple State Manager  *
-     *************************/
-    const state = {
-      name: localStorage.getItem('cg_name') || 'Player',
-      face: localStorage.getItem('cg_face') || '(•‿•)',
-      faceColor: localStorage.getItem('cg_faceColor') || '#ffd1a5',
-      coins: +(localStorage.getItem('cg_coins') || 0),
-      xp: +(localStorage.getItem('cg_xp') || 0),
-      level: +(localStorage.getItem('cg_level') || 1),
-      glow: localStorage.getItem('cg_glow') === '1',
-      fairy: localStorage.getItem('cg_fairy') === '1',
-      plant: localStorage.getItem('cg_plant') === '1',
-      theme: localStorage.getItem('cg_theme') || 'warm',
-      missions: JSON.parse(localStorage.getItem('cg_missions') || '[]'),
-      chat: JSON.parse(localStorage.getItem('cg_chat') || '[]'),
-      leaderboard: JSON.parse(localStorage.getItem('cg_lb') || '[]'),
+  </div>  <!-- GAME MODALS -->  <div class="backdrop" id="modal-ttt"><div class="modal"><header class="row" style="justify-content:space-between"><div class="title"><span>❌⭕</span><b>&nbsp;Tic‑Tac‑Toe</b></div><div class="row"><button class="btn" data-close>Close</button></div></header><div class="canvas-wrap"><div class="toolbar"><span class="pill" id="tttStatus">Your turn</span><button class="btn" id="tttReset">Reset</button></div><div id="tttBoard" style="display:grid;grid-template-columns:repeat(3,min(120px,28vw));gap:8px"></div></div></div></div>  <div class="backdrop" id="modal-snake"><div class="modal"><header class="row" style="justify-content:space-between"><div class="title"><span>🐍</span><b>&nbsp;Snake</b></div><div class="row"><button class="btn" data-close>Close</button></div></header><div class="canvas-wrap"><div class="toolbar"><span class="pill" id="snakeScore">Score: 0</span><button class="btn" id="snakeReset">Restart</button></div><canvas id="snakeCanvas" width="420" height="420" style="background:#0f0e11;border:1px solid rgba(255,255,255,.1);border-radius:12px"></canvas></div></div></div>  <div class="backdrop" id="modal-memory"><div class="modal"><header class="row" style="justify-content:space-between"><div class="title"><span>🃏</span><b>&nbsp;Memory Flip</b></div><div class="row"><button class="btn" data-close>Close</button></div></header><div class="canvas-wrap"><div class="toolbar"><span class="pill" id="memStatus">Find all pairs!</span><button class="btn" id="memReset">Shuffle</button></div><div id="memGrid" style="display:grid;grid-template-columns:repeat(6,min(80px,13vw));gap:8px"></div></div></div></div>  <div class="backdrop" id="modal-space"><div class="modal"><header class="row" style="justify-content:space-between"><div class="title"><span>🚀</span><b>&nbsp;Space Shooter</b></div><div class="row"><button class="btn" data-close>Close</button></div></header><div class="canvas-wrap"><div class="toolbar"><span class="pill" id="spaceScore">Score: 0</span><button class="btn" id="spaceReset">Restart</button></div><canvas id="spaceCanvas" width="760" height="440" style="background:radial-gradient(600px 300px at 50% 20%,#251f2f,#0b0a0e)"></canvas></div></div></div>  <div class="backdrop" id="modal-flappy"><div class="modal"><header class="row" style="justify-content:space-between"><div class="title"><span>🕊️</span><b>&nbsp;Flappy Café</b></div><div class="row"><button class="btn" data-close>Close</button></div></header><div class="canvas-wrap"><div class="toolbar"><span class="pill" id="flappyScore">Score: 0</span><button class="btn" id="flappyReset">Restart</button></div><canvas id="flappyCanvas" width="420" height="600" style="background:linear-gradient(#14121a,#0b0a0e)"></canvas></div></div></div>  <script>
+    /* ======= STATE ======= */
+    const S = {
+      name: localStorage.getItem('cg_name')||'Player',
+      face: localStorage.getItem('cg_face')||'😊',
+      faceColor: localStorage.getItem('cg_faceColor')||'#ffd1a5',
+      coins:+(localStorage.getItem('cg_coins')||0),
+      xp:+(localStorage.getItem('cg_xp')||0),
+      level:+(localStorage.getItem('cg_level')||1),
+      theme: localStorage.getItem('cg_theme')||'warm',
+      glow: localStorage.getItem('cg_glow')==='1',
+      plant: localStorage.getItem('cg_plant')==='1',
+      chat: JSON.parse(localStorage.getItem('cg_chat')||'[]'),
+      lb: JSON.parse(localStorage.getItem('cg_lb')||'[]'),
+      missions: JSON.parse(localStorage.getItem('cg_missions')||'[]'),
     };
-
-    const XP_TABLE = [0, 100, 250, 450, 700, 1000, 1400];
-
-    function saveAll() {
-      const kv = [
-        ['cg_name', state.name], ['cg_face', state.face], ['cg_faceColor', state.faceColor],
-        ['cg_coins', state.coins], ['cg_xp', state.xp], ['cg_level', state.level],
-        ['cg_glow', state.glow ? '1' : '0'], ['cg_fairy', state.fairy ? '1' : '0'],
-        ['cg_plant', state.plant ? '1' : '0'], ['cg_theme', state.theme],
-        ['cg_missions', JSON.stringify(state.missions)],
-        ['cg_chat', JSON.stringify(state.chat)],
-        ['cg_lb', JSON.stringify(state.leaderboard)],
-      ];
-      kv.forEach(([k,v]) => localStorage.setItem(k, v));
-      toast('Progress saved!');
+    const XP = [0,100,250,450,700,1000,1400,1800];
+    function save(){[
+      ['cg_name',S.name],['cg_face',S.face],['cg_faceColor',S.faceColor],['cg_coins',S.coins],['cg_xp',S.xp],['cg_level',S.level],['cg_theme',S.theme],['cg_glow',S.glow?'1':'0'],['cg_plant',S.plant?'1':'0'],['cg_chat',JSON.stringify(S.chat)],['cg_lb',JSON.stringify(S.lb)],['cg_missions',JSON.stringify(S.missions)]
+    ].forEach(([k,v])=>localStorage.setItem(k,v)); toast('Saved ✅'); }
+    function addXP(n){S.xp+=n; S.coins+=Math.floor(n/5); while(S.level<XP.length&&S.xp>=XP[S.level]){S.level++; toast('Level up! Lv '+S.level+' ✨');} hud(); lbUpdate(); }
+    function hud(){
+      q('#playerName').textContent=S.name; q('#level').textContent=S.level; q('#coins').textContent=S.coins; q('#xp').textContent=S.xp; q('#xpNext').textContent=XP[S.level]||S.level*300+500; q('#xpBar').style.width=Math.min(100,Math.floor((S.xp-(XP[S.level-1]||0))/((XP[S.level]||S.level*300+500)-(XP[S.level-1]||0))*100))+'%';
+      const face=q('#avatarBox'); face.textContent=S.face; face.style.color=S.faceColor; q('#secretBtn').textContent= S.level>=3?'Play':'Locked'; q('#secretBtn').disabled= S.level<3;
+      face.style.boxShadow = S.glow?'0 0 24px rgba(255,238,170,.35) inset':''; face.style.borderColor = S.plant?'rgba(154,208,236,.6)':'rgba(255,255,255,.1)';
+      lbRender();
     }
+    function lbUpdate(){const e={name:S.name,level:S.level,xp:S.xp,coins:S.coins,at:Date.now()}; S.lb=S.lb.filter(x=>x.name!==S.name); S.lb.push(e); S.lb.sort((a,b)=>b.level-a.level||b.xp-a.xp); S.lb=S.lb.slice(0,20); lbRender();}
+    function lbRender(){const wrap=q('#lbList'); if(!S.lb.length) {wrap.textContent='No data yet.'; return;} wrap.innerHTML=S.lb.map((e,i)=>`<div class="row" style="gap:10px;margin-bottom:6px"><div class="pill">#${i+1}</div><div style="flex:1"><b>${e.name}</b><div class="small">Lv ${e.level} • XP ${e.xp} • ${new Date(e.at).toLocaleString()}</div></div><div class="pill">${e.coins}c</div></div>`).join('');}
 
-    function addXP(amount, reason='Game Reward') {
-      state.xp += amount; state.coins += Math.floor(amount/5);
-      while (state.level < XP_TABLE.length && state.xp >= XP_TABLE[state.level]) {
-        state.level++;
-        toast(`Level up! You reached Level ${state.level} ✨`);
-      }
-      renderHUD();
-      updateLeaderboard();
-    }
+    /* ======= UTIL ======= */
+    const $=document; const q=(s)=>$.querySelector(s); const qa=(s)=>Array.from($.querySelectorAll(s));
+    function toast(m){const t=$.createElement('div'); t.textContent=m; Object.assign(t.style,{position:'fixed',bottom:'18px',left:'50%',transform:'translateX(-50%)',background:'#2b2532',border:'1px solid rgba(255,255,255,.2)',padding:'10px 14px',borderRadius:'12px',zIndex:9999}); $.body.appendChild(t); setTimeout(()=>t.remove(),1800); clickS();}
 
-    function toast(msg) {
-      const t = document.createElement('div');
-      t.textContent = msg;
-      t.style.position = 'fixed'; t.style.bottom = '20px'; t.style.left = '50%';
-      t.style.transform = 'translateX(-50%)'; t.style.background = '#2b2532'; t.style.border = '1px solid rgba(255,255,255,.2)';
-      t.style.padding = '10px 14px'; t.style.borderRadius = '12px'; t.style.zIndex = '9999';
-      document.body.appendChild(t); setTimeout(()=>{ t.remove(); }, 2000);
-      clickSound();
-    }
+    /* ======= UI HOOKS ======= */
+    qa('.tab').forEach(x=>x.onclick=()=>{qa('.tab').forEach(t=>t.classList.remove('active')); x.classList.add('active'); qa('.content').forEach(c=>c.classList.add('hidden')); q('#tab-'+x.dataset.tab).classList.remove('hidden'); clickS();});
+    q('#applyName').onclick=()=>{const v=q('#nameInput').value.trim(); if(v){S.name=v; hud(); toast('Nickname set');}}
+    q('#faceSelect').oninput=e=>{S.face=e.target.value; hud();}
+    q('#faceColor').oninput=e=>{S.faceColor=e.target.value; hud();}
+    q('#decorGlow').onclick=()=>{S.glow=!S.glow; hud();}
+    q('#decorPlant').onclick=()=>{S.plant=!S.plant; hud();}
+    q('#saveBtn').onclick=save;
 
-    function renderHUD() {
-      document.getElementById('playerName').textContent = state.name;
-      document.getElementById('coins').textContent = state.coins;
-      document.getElementById('level').textContent = state.level;
-      document.getElementById('xp').textContent = state.xp;
-      const next = XP_TABLE[state.level] || (state.level*300+500);
-      document.getElementById('xpNext').textContent = next;
-      const pct = Math.min(100, Math.floor((state.xp - (XP_TABLE[state.level-1]||0)) / (next - (XP_TABLE[state.level-1]||0)) * 100));
-      document.getElementById('xpBar').style.width = pct + '%';
-      const face = document.getElementById('avatarFace');
-      face.textContent = state.face; face.style.color = state.faceColor;
-      document.getElementById('secretBtn').textContent = state.level >= 3 ? 'Play' : 'Locked';
-      document.getElementById('secretBtn').disabled = state.level < 3;
-      // Decorations
-      const box = document.getElementById('avatarBox');
-      box.style.background = state.glow ? 'radial-gradient(200px 100px at 50% 10%, rgba(233,184,110,.35), transparent), #241f2c' : '#241f2c';
-      box.style.boxShadow = state.fairy ? '0 0 24px rgba(255,238,170,.35) inset' : '';
-      box.style.borderColor = state.plant ? 'rgba(154, 208, 236, .6)' : 'rgba(255,255,255,.08)';
-      renderLeaderboard();
-    }
+    // themes & ambience visual
+    const root=document.documentElement; function theme(t){S.theme=t; if(t==='warm'){root.style.setProperty('--a','#e9b86e'); root.style.setProperty('--b','#9ad0ec');} else if(t==='cool'){root.style.setProperty('--a','#9ad0ec'); root.style.setProperty('--b','#b885f5');} else {root.style.setProperty('--a','#ffb7c5'); root.style.setProperty('--b','#ffdfe7');}}
+    q('#themeWarm').onclick=()=>theme('warm'); q('#themeCool').onclick=()=>theme('cool'); q('#themeSakura').onclick=()=>theme('sakura');
 
-    /*****************
-     * Tabs & UI     *
-     *****************/
-    document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(a => a.classList.remove('active'));
-      t.classList.add('active');
-      const name = t.dataset.tab;
-      document.querySelectorAll('.content').forEach(c => c.classList.add('hidden'));
-      document.getElementById('tab-' + name).classList.remove('hidden');
-      clickSound();
-    }));
+    // local chat
+    function chatRender(){const log=q('#chatLog'); log.innerHTML=''; S.chat.forEach(m=>{const d=$.createElement('div'); d.className='msg '+(m.me?'me':''); d.textContent=m.text; Object.assign(d.style,{background:m.me?'#2b2532':'#231e28',border:'1px solid rgba(255,255,255,.12)',padding:'10px 12px',borderRadius:'12px',maxWidth:'80%'}); if(m.me) d.style.marginLeft='auto'; log.appendChild(d);}); log.scrollTop=log.scrollHeight;}
+    q('#sendMsg').onclick=()=>{const i=q('#chatInput'); const t=i.value.trim(); if(!t) return; S.chat.push({text:t,me:true}); setTimeout(()=>{S.chat.push({text:randCafe(),me:false}); chatRender();},400); i.value=''; chatRender(); save();}
+    function randCafe(){return ['Fresh cup coming right up ☕','GG! Want a rematch?','Daily quest checked yet?','Lo‑fi beats are on…','Your avatar looks adorable ✨'][Math.random()*5|0];}
 
-    document.getElementById('applyName').onclick = () => {
-      const v = document.getElementById('nameInput').value.trim();
-      if (v) { state.name = v; renderHUD(); toast('Nickname updated'); }
-    }
-    document.getElementById('faceSelect').oninput = e => { state.face = e.target.value; renderHUD(); }
-    document.getElementById('faceColor').oninput = e => { state.faceColor = e.target.value; renderHUD(); }
+    // missions
+    const DAILY=[{id:'winttt',text:'Win Tic‑Tac‑Toe once',reward:40},{id:'sn15',text:'Score 15+ in Snake',reward:60},{id:'mem80',text:'Finish Memory in under 80s',reward:80}];
+    function missionResetIf(){const d=new Date().toDateString(); if(localStorage.getItem('cg_day')!==d){localStorage.setItem('cg_day',d); S.missions=DAILY.map(x=>({...x,done:false}));} missionRender();}
+    function missionDone(id){const m=S.missions.find(x=>x.id===id); if(m && !m.done){m.done=true; addXP(m.reward); toast('Quest complete +'+m.reward+' XP'); missionRender();}}
+    function missionRender(){const ul=q('#missionList'); if(!S.missions.length) {ul.innerHTML='<li class="small">Come back tomorrow!</li>'; return;} ul.innerHTML=S.missions.map(m=>`<li class="row" style="justify-content:space-between;gap:8px;margin-bottom:8px;padding:10px;background:#221d27;border:1px solid rgba(255,255,255,.06);border-radius:12px;${m.done?'opacity:.6;text-decoration:line-through':''}"><span>${m.text}</span><span class="pill">${m.done?'Done':'+'+m.reward+' XP'}</span></li>`).join('');}
 
-    document.getElementById('toggleFairy').onclick = () => { state.fairy = !state.fairy; renderHUD(); }
-    document.getElementById('togglePlant').onclick = () => { state.plant = !state.plant; renderHUD(); }
+    // modals
+    qa('[data-open]').forEach(b=>b.onclick=()=>{q('#modal-'+b.dataset.open).style.display='flex'; if(b.dataset.open==='ttt') tttInit(); if(b.dataset.open==='snake') snakeInit(); if(b.dataset.open==='memory') memInit(); if(b.dataset.open==='space') spaceInit(); if(b.dataset.open==='flappy') flappyInit(); clickS();});
+    qa('[data-close]').forEach(b=>b.onclick=(e)=>{e.target.closest('.backdrop').style.display='none'; clickS();});
+    q('#secretBtn').onclick=()=>{if(S.level>=3) toast('Surprise coming soon ✨'); else toast('Reach Level 3 to unlock!')}
 
-    document.getElementById('saveBtn').onclick = saveAll;
+    // ambience audio (touch to enable)
+    let actx, lofi, rain; function ensureAudio(){if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();}
+    function clickS(){ensureAudio(); const o=actx.createOscillator(), g=actx.createGain(); o.type='triangle'; o.frequency.value=520; g.gain.value=.06; o.connect(g); g.connect(actx.destination); o.start(); setTimeout(()=>o.stop(),70)}
+    q('#toggleLofi').onclick=()=>{ensureAudio(); if(lofi){lofi.stop(); lofi=null; return;} lofi=(()=>{const o1=actx.createOscillator(),g1=actx.createGain();o1.type='sawtooth';o1.frequency.value=220;g1.gain.value=.02;o1.connect(g1);const o2=actx.createOscillator(),g2=actx.createGain();o2.type='square';o2.frequency.value=110;g2.gain.value=.015;o2.connect(g2);const f=actx.createBiquadFilter();f.type='lowpass';f.frequency.value=800;const mix=actx.createGain();mix.gain.value=.2;g1.connect(f);g2.connect(f);f.connect(mix);mix.connect(actx.destination);o1.start();o2.start();return{stop(){o1.stop();o2.stop();mix.disconnect();}}})();}
+    q('#toggleAmb').onclick=()=>{ensureAudio(); if(rain){rain.stop(); rain=null; return;} rain=(()=>{const N=2*actx.sampleRate,B=actx.createBuffer(1,N,actx.sampleRate),d=B.getChannelData(0); for(let i=0;i<N;i++) d[i]=Math.random()*2-1; const s=actx.createBufferSource(); s.buffer=B; s.loop=true; const f=actx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=1000; const g=actx.createGain(); g.gain.value=.08; s.connect(f); f.connect(g); g.connect(actx.destination); s.start(0); return{stop(){s.stop();g.disconnect();}}})();}
 
-    // Themes
-    const root = document.documentElement;
-    function setTheme(which) {
-      state.theme = which;
-      if (which === 'warm') {
-        root.style.setProperty('--accent', '#e9b86e');
-        root.style.setProperty('--accent-2', '#9ad0ec');
-      } else if (which === 'cool') {
-        root.style.setProperty('--accent', '#9ad0ec');
-        root.style.setProperty('--accent-2', '#b885f5');
-      } else if (which === 'sakura') {
-        root.style.setProperty('--accent', '#ffb7c5');
-        root.style.setProperty('--accent-2', '#ffdfe7');
-      }
-      renderHUD();
-    }
-    document.getElementById('themeWarm').onclick = ()=> setTheme('warm');
-    document.getElementById('themeCool').onclick = ()=> setTheme('cool');
-    document.getElementById('themeSakura').onclick = ()=> setTheme('sakura');
-    document.getElementById('toggleGlow').onclick = ()=> { state.glow = !state.glow; toast(state.glow ? 'Glow on' : 'Glow off'); }
+    // rain FX overlay
+    let rainFx=null; q('#toggleRainFx').onclick=()=>{ if(rainFx){rainFx.remove(); rainFx=null; return;} const c=$.createElement('canvas'); Object.assign(c.style,{position:'fixed',inset:'0',pointerEvents:'none',opacity:.25,zIndex:4}); c.width=innerWidth; c.height=innerHeight; $.body.appendChild(c); rainFx=c; const ctx=c.getContext('2d'); const drops=Array.from({length:80},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:1+Math.random()*2})); (function step(){ if(!rainFx) return; ctx.clearRect(0,0,c.width,c.height); ctx.strokeStyle='rgba(255,255,255,.35)'; ctx.lineWidth=1; drops.forEach(d=>{ctx.beginPath(); ctx.moveTo(d.x,d.y); ctx.lineTo(d.x+1,d.y+10*d.s); ctx.stroke(); d.y+=8*d.s; d.x+=.6; if(d.y>innerHeight){d.y=-10; d.x=Math.random()*innerWidth;}}); requestAnimationFrame(step); })(); }
 
-    // Window rain FX toggler (visual only)
-    let rainFx = null;
-    document.getElementById('toggleRainFx').onclick = () => {
-      if (rainFx) { rainFx.remove(); rainFx = null; return; }
-      const fx = document.createElement('canvas'); fx.width = innerWidth; fx.height = innerHeight; fx.style.position='fixed'; fx.style.inset='0'; fx.style.pointerEvents='none'; fx.style.opacity='.25'; fx.id='rainFx'; document.body.appendChild(fx); rainFx = fx; rainEffect(fx.getContext('2d'));
-    }
+    // themes
+    q('#toggleGlow').onclick=()=>toast('Glow toggled — adjust via avatar ❣️'); function setBootTheme(){theme(S.theme);} setBootTheme();
 
-    function rainEffect(ctx){
-      const drops = Array.from({length:80}, ()=> ({x: Math.random()*innerWidth, y: Math.random()*innerHeight, s: 1+Math.random()*2}));
-      function step(){
-        if (!rainFx) return;
-        ctx.clearRect(0,0,innerWidth,innerHeight);
-        ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth=1;
-        drops.forEach(d=>{ ctx.beginPath(); ctx.moveTo(d.x,d.y); ctx.lineTo(d.x+1, d.y+10*d.s); ctx.stroke(); d.y += 8*d.s; d.x += .6; if (d.y>innerHeight) { d.y = -10; d.x = Math.random()*innerWidth; } });
-        requestAnimationFrame(step);
-      }
-      step();
-    }
+    /* ======= GAMES ======= */
+    // TTT
+    let tttBoard=[], tttTurn=true, tttActive=false; function tttInit(){ tttBoard=Array(9).fill(null); tttTurn=true; tttActive=true; q('#tttStatus').textContent='Your turn'; const board=q('#tttBoard'); board.innerHTML=''; for(let i=0;i<9;i++){const cell=$.createElement('button'); cell.className='btn'; Object.assign(cell.style,{width:'min(120px,28vw)',height:'min(120px,28vw)',fontSize:'42px',borderRadius:'16px'}); cell.onclick=()=>tttClick(i,cell); board.appendChild(cell);} q('#tttReset').onclick=tttInit; }
+    function tttClick(i,el){ if(!tttTurn||tttBoard[i]) return; tttBoard[i]='X'; el.textContent='X'; tttTurn=false; tttCheck(); setTimeout(tttAI,260);} 
+    function tttAI(){ if(!tttActive) return; const m=tttBest(tttBoard,'O'); if(m!=null){ tttBoard[m]='O'; q('#tttBoard').children[m].textContent='O'; } tttTurn=true; tttCheck(); }
+    function tttCheck(){ const w=tttWinner(tttBoard); const s=q('#tttStatus'); if(w==='X'){ s.textContent='You win! +40 XP'; addXP(40); missionDone('winttt'); tttActive=false; } else if(w==='O'){ s.textContent='AI wins!'; tttActive=false; } else if(tttBoard.every(Boolean)){ s.textContent='Draw +15 XP'; addXP(15); tttActive=false; } else { s.textContent = tttTurn? 'Your turn':'AI…'; } }
+    function tttWinner(b){ for(const [a,c,d] of [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]) if(b[a]&&b[a]===b[c]&&b[a]===b[d]) return b[a]; return null; }
+    function tttBest(b,me){ const op=me==='X'?'O':'X'; for(let i=0;i<9;i++){ if(!b[i]){ b[i]=me; if(tttWinner(b)===me){ b[i]=null; return i;} b[i]=null; } } for(let i=0;i<9;i++){ if(!b[i]){ b[i]=op; if(tttWinner(b)===op){ b[i]=null; return i;} b[i]=null; } } for(const i of [4,0,2,6,8,1,3,5,7]) if(!b[i]) return i; return null; }
 
-    /*****************
-     * Leaderboard   *
-     *****************/
-    function updateLeaderboard() {
-      const entry = { name: state.name, level: state.level, xp: state.xp, coins: state.coins, at: Date.now() };
-      const existing = state.leaderboard.filter(e => e.name !== state.name);
-      existing.push(entry);
-      existing.sort((a,b)=> b.level - a.level || b.xp - a.xp);
-      state.leaderboard = existing.slice(0, 20);
-      renderLeaderboard();
-    }
+    // Snake
+    let snakeTimer=null,snake,dir,food,score; function snakeInit(){ const cvs=q('#snakeCanvas'),ctx=cvs.getContext('2d'); const size=20,cells=21; snake=[{x:10,y:10}]; dir={x:1,y:0}; food=spawn(); score=0; q('#snakeScore').textContent='Score: 0'; function spawn(){return{x:Math.floor(Math.random()*cells),y:Math.floor(Math.random()*cells)}} function draw(){ctx.fillStyle='#0f0e11';ctx.fillRect(0,0,cvs.width,cvs.height); ctx.strokeStyle='rgba(255,255,255,.05)'; for(let i=0;i<=cells;i++){ctx.beginPath();ctx.moveTo(i*size,0);ctx.lineTo(i*size,cvs.height);ctx.stroke();ctx.beginPath();ctx.moveTo(0,i*size);ctx.lineTo(cvs.width,i*size);ctx.stroke();} ctx.fillStyle='#9ad0ec';ctx.fillRect(food.x*size,food.y*size,size,size); ctx.fillStyle='#78e08f'; snake.forEach(p=>ctx.fillRect(p.x*size,p.y*size,size,size)); }
+      function step(){ const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y}; if(head.x<0||head.y<0||head.x>=cells||head.y>=cells||snake.some(p=>p.x===head.x&&p.y===head.y)){ clearInterval(snakeTimer); addXP(20); toast('Game over +20 XP'); return;} snake.unshift(head); if(head.x===food.x&&head.y===food.y){ score++; q('#snakeScore').textContent='Score: '+score; food=spawn(); addXP(5); if(score>=15) missionDone('sn15'); } else snake.pop(); draw(); }
+      draw(); clearInterval(snakeTimer); snakeTimer=setInterval(step,120); q('#snakeReset').onclick=snakeInit; window.onkeydown=e=>{ if(e.key==='ArrowUp'&&dir.y!==1) dir={x:0,y:-1}; else if(e.key==='ArrowDown'&&dir.y!==-1) dir={x:0,y:1}; else if(e.key==='ArrowLeft'&&dir.x!==1) dir={x:-1,y:0}; else if(e.key==='ArrowRight'&&dir.x!==-1) dir={x:1,y:0}; } }
 
-    function renderLeaderboard(){
-      const wrap = document.getElementById('lbList');
-      if (!state.leaderboard.length) { wrap.textContent = 'No data yet. Play games to enter the leaderboard!'; return; }
-      wrap.innerHTML = state.leaderboard.map((e,i)=>`<div class="row" style="gap:10px; margin-bottom:6px"><div class="pill">#${i+1}</div><div style="flex:1"><b>${e.name}</b><div class="small">Lv ${e.level} • XP ${e.xp} • ${new Date(e.at).toLocaleString()}</div></div><div class="pill">${e.coins}c</div></div>`).join('');
-    }
+    // Memory
+    let memPairs=['🍩','🎮','☕','🌧️','🌸','🧩','👾','🪴','🃏','🚀','💫','🎧'], memOpen=[], memSolved=new Set(), memStart=0; function memInit(){ memOpen=[]; memSolved.clear(); memStart=Date.now(); const grid=q('#memGrid'); grid.innerHTML=''; const deck=shuffle([...memPairs,...memPairs]); deck.forEach((sym,idx)=>{ const b=$.createElement('button'); b.className='btn'; Object.assign(b.style,{width:'min(80px,13vw)',height:'min(80px,13vw)',fontSize:'36px'}); b.dataset.sym=sym; b.dataset.idx=idx; b.textContent='❓'; b.onclick=()=>memFlip(b); grid.appendChild(b); }); q('#memStatus').textContent='Find all pairs!'; q('#memReset').onclick=memInit; }
+    function memFlip(b){ if(memOpen.length===2||memSolved.has(+b.dataset.idx)||b.textContent!=='❓') return; b.textContent=b.dataset.sym; memOpen.push(b); if(memOpen.length===2){ const [a,c]=memOpen; if(a.dataset.sym===c.dataset.sym){ memSolved.add(+a.dataset.idx); memSolved.add(+c.dataset.idx); addXP(10); memOpen=[]; if(memSolved.size===memPairs.length*2){ const t=Math.round((Date.now()-memStart)/1000); q('#memStatus').textContent=`Done in ${t}s! +80 XP`; addXP(80); if(t<=80) missionDone('mem80'); } } else setTimeout(()=>{ a.textContent='❓'; c.textContent='❓'; memOpen=[]; },600); } }
+    function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
 
-    /*****************
-     * Missions      *
-     *****************/
-    const DAILY = [
-      { id:'win_ttt', text:'Win 1 game of Tic‑Tac‑Toe', reward: 40 },
-      { id:'score_snake', text:'Score 15+ in Snake', reward: 60 },
-      { id:'pairs_memory', text:'Finish Memory in under 80s', reward: 80 },
-    ];
+    // Space Shooter
+    let spaceRAF=null; function spaceInit(){ const cvs=q('#spaceCanvas'),ctx=cvs.getContext('2d'),W=cvs.width,H=cvs.height; let ship={x:W/2,y:H-50,vx:0}, bullets=[],enemies=[],last=0,score=0,keys={}; q('#spaceScore').textContent='Score: 0'; function spawn(){ enemies.push({x:20+Math.random()*(W-40),y:-20,vy:1+Math.random()*1.5,hp:2}); } function draw(){ ctx.clearRect(0,0,W,H); ctx.fillStyle='rgba(255,255,255,.08)'; for(let i=0;i<100;i++){ ctx.fillRect((i*37+Date.now()/20)%W,(i*59)%H,2,2);} ctx.fillStyle='#9ad0ec'; ctx.fillRect(ship.x-12,ship.y-8,24,16); ctx.fillStyle='#e9b86e'; bullets.forEach(b=>ctx.fillRect(b.x-2,b.y-8,4,8)); ctx.fillStyle='#ff6b6b'; enemies.forEach(en=>ctx.fillRect(en.x-14,en.y-10,28,20)); ctx.fillStyle='rgba(255,255,255,.6)'; ctx.fillText('Arrows to move • Space to shoot',10,20);} function step(ts){ if(!last||ts-last>900){ last=ts; if(enemies.length<12) spawn(); } ship.vx=(keys['ArrowLeft']?-3:0)+(keys['ArrowRight']?3:0); ship.x=Math.max(16,Math.min(W-16,ship.x+ship.vx)); if(keys['Space']&&(!bullets.length||Date.now()-bullets[bullets.length-1].t>250)) bullets.push({x:ship.x,y:ship.y-10,t:Date.now()}); bullets.forEach(b=>b.y-=6); enemies.forEach(en=>en.y+=en.vy); enemies.forEach((en,ei)=>{ bullets.forEach((b,bi)=>{ if(Math.abs(en.x-b.x)<14&&Math.abs(en.y-b.y)<12){ en.hp--; bullets.splice(bi,1); score+=5; q('#spaceScore').textContent='Score: '+score; addXP(2); } }); }); enemies=enemies.filter(en=>en.hp>0&&en.y<H+20); bullets=bullets.filter(b=>b.y>-20); draw(); spaceRAF=requestAnimationFrame(step);} cancelAnimationFrame(spaceRAF); spaceRAF=requestAnimationFrame(step); q('#spaceReset').onclick=spaceInit; window.onkeydown=e=>{keys[e.code]=true; if(['ArrowLeft','ArrowRight','Space'].includes(e.code)) e.preventDefault();}; window.onkeyup=e=>{keys[e.code]=false;}; }
 
-    function resetMissionsIfNeeded(){
-      const today = new Date().toDateString();
-      const stored = localStorage.getItem('cg_mission_day');
-      if (stored !== today) {
-        localStorage.setItem('cg_mission_day', today);
-        state.missions = DAILY.map(m => ({...m, done:false}));
-      }
-      renderMissions();
-    }
+    // Flappy Café
+    let flapRAF=null; function flappyInit(){ const c=q('#flappyCanvas'),x=c.getContext('2d'); let y=250, v=0, g=0.5, score=0, pipes=[],t=0,alive=true; function pipe(){const gap=120, top=60+Math.random()*260; pipes.push({x:c.width+20, top:top-gap/2, bottom:top+gap/2}); }
+      function tap(){ if(!alive){restart(); return;} v=-7; }
+      function restart(){ y=250; v=0; score=0; pipes=[]; t=0; alive=true; pipe(); q('#flappyScore').textContent='Score: 0'; }
+      c.onclick=tap; window.onkeydown=(e)=>{ if(e.code==='Space') {e.preventDefault(); tap();} };
+      function draw(){ x.clearRect(0,0,c.width,c.height); // bg stars
+        x.fillStyle='rgba(255,255,255,.08)'; for(let i=0;i<80;i++){x.fillRect((i*29+Date.now()/30)%c.width,(i*43)%c.height,2,2);} // bird
+        x.fillStyle='#ffd1a5'; x.beginPath(); x.arc(100,y,12,0,Math.PI*2); x.fill(); // pipes
+        x.fillStyle='#78e08f'; pipes.forEach(p=>{ x.fillRect(p.x,0,40,p.top); x.fillRect(p.x,p.bottom,40,c.height-p.bottom); }); x.fillStyle='rgba(255,255,255,.7)'; x.fillText('Tap/Space to flap',10,20); }
+      function step(){ if(!alive){draw(); return;} t++; if(t%80===0) pipe(); v+=g; y+=v; pipes.forEach(p=>p.x-=3); // collision
+        pipes.forEach(p=>{ if(100+12>p.x&&100-12<p.x+40&&(y-12<p.top||y+12>p.bottom)) alive=false; if(!p.passed&&p.x+40<100){p.passed=true; score++; q('#flappyScore').textContent='Score: '+score; addXP(3);} });
+        pipes=pipes.filter(p=>p.x>-60); if(y>c.height-12||y<12) alive=false; draw(); flapRAF=requestAnimationFrame(step); }
+      cancelAnimationFrame(flapRAF); restart(); flapRAF=requestAnimationFrame(step); q('#flappyReset').onclick=()=>{restart();}; }
 
-    function completeMission(id){
-      const m = state.missions.find(x=>x.id===id);
-      if (m && !m.done) { m.done = true; addXP(m.reward, 'Quest'); toast(`Quest complete: +${m.reward} XP`); renderMissions(); }
-    }
-
-    function renderMissions(){
-      const ul = document.getElementById('missionList');
-      if (!state.missions.length) { ul.innerHTML = '<li>No quests today. Come back soon!</li>'; return; }
-      ul.innerHTML = state.missions.map(m=>`<li class="${m.done?'done':''}"><span>${m.text}</span><span class="pill">${m.done?'Done':'+'+m.reward+' XP'}</span></li>`).join('');
-    }
-
-    /*****************
-     * Chat (local)  *
-     *****************/
-    function renderChat(){
-      const log = document.getElementById('chatLog');
-      log.innerHTML = '';
-      state.chat.forEach(c=>{
-        const div = document.createElement('div'); div.className = 'msg ' + (c.me?'me':''); div.textContent = c.text; log.appendChild(div);
-      });
-      log.scrollTop = log.scrollHeight;
-    }
-    document.getElementById('sendMsg').onclick = () => {
-      const inp = document.getElementById('chatInput'); const t = inp.value.trim(); if (!t) return;
-      state.chat.push({text:t, me:true});
-      // café bot cozy reply
-      setTimeout(()=>{ state.chat.push({text: randomCafeReply(), me:false}); renderChat(); }, 400);
-      inp.value=''; renderChat(); saveAll();
-    }
-    function randomCafeReply(){
-      const arr = [
-        'Fresh cup coming right up ☕', 'GG! Want a rematch?', 'Lo‑fi beats are on…',
-        'Daily quest checked yet?', 'Your avatar looks adorable today ✨', 'Pro tip: space bar to shoot!'
-      ];
-      return arr[Math.floor(Math.random()*arr.length)];
-    }
-
-    /*****************
-     * Modals        *
-     *****************/
-    document.querySelectorAll('[data-open]').forEach(btn=> btn.addEventListener('click', ()=>{
-      document.getElementById(btn.dataset.open).style.display='flex'; clickSound();
-      if (btn.dataset.open==='game-ttt') initTTT();
-      if (btn.dataset.open==='game-snake') initSnake();
-      if (btn.dataset.open==='game-memory') initMemory();
-      if (btn.dataset.open==='game-space') initSpace();
-    }));
-    document.querySelectorAll('[data-close]').forEach(btn=> btn.addEventListener('click', (e)=>{
-      e.target.closest('.modal-backdrop').style.display='none'; clickSound();
-    }));
-
-    document.getElementById('secretBtn').onclick = () => {
-      if (state.level >= 3) { toast('Surprise unlocked! Coming soon ✨'); }
-      else toast('Reach Level 3 to unlock!');
-    }
-
-    /*****************
-     * Audio & Ambience
-     *****************/
-    let audioCtx = null, lofiNode = null, rainNode = null;
-    function ensureAudio(){ if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-
-    function clickSound(){ ensureAudio(); const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.type='triangle'; o.frequency.value=520; g.gain.value=.06; o.connect(g); g.connect(audioCtx.destination); o.start(); setTimeout(()=>{o.stop();}, 80); }
-
-    function toggleLofi(){ ensureAudio(); if (lofiNode) { lofiNode.stop(); lofiNode=null; return; } lofiNode = createLofiLoop(audioCtx); lofiNode.start(); }
-    function toggleRain(){ ensureAudio(); if (rainNode) { rainNode.stop(); rainNode.disconnect(); rainNode=null; return; } rainNode = createRainNoise(audioCtx); }
-
-    document.getElementById('toggleLofi').onclick = toggleLofi;
-    document.getElementById('toggleAmbience').onclick = toggleRain;
-
-    function createLofiLoop(ctx){
-      const o1 = ctx.createOscillator(); const g1 = ctx.createGain(); o1.type='sawtooth'; o1.frequency.value=220; g1.gain.value=0.02; o1.connect(g1);
-      const o2 = ctx.createOscillator(); const g2 = ctx.createGain(); o2.type='square'; o2.frequency.value=110; g2.gain.value=0.015; o2.connect(g2);
-      const l = ctx.createBiquadFilter(); l.type='lowpass'; l.frequency.value=800;
-      const mix = ctx.createGain(); mix.gain.value=0.2;
-      g1.connect(l); g2.connect(l); l.connect(mix); mix.connect(ctx.destination);
-      o1.start(); o2.start();
-      const api = { stop(){ o1.stop(); o2.stop(); mix.disconnect(); } };
-      return api;
-    }
-    function createRainNoise(ctx){
-      const bufferSize = 2 * ctx.sampleRate;
-      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-      const output = noiseBuffer.getChannelData(0);
-      for (let i = 0; i < bufferSize; i++) { output[i] = Math.random() * 2 - 1; }
-      const white = ctx.createBufferSource(); white.buffer = noiseBuffer; white.loop = true;
-      const filter = ctx.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.value = 1000;
-      const gain = ctx.createGain(); gain.gain.value = 0.08;
-      white.connect(filter); filter.connect(gain); gain.connect(ctx.destination); white.start(0);
-      white.stop = white.stop.bind(white);
-      return { stop(){ white.stop(); gain.disconnect(); } };
-    }
-
-    /*****************
-     * Game: TicTacToe
-     *****************/
-    let tttBoard = Array(9).fill(null), tttYourTurn = true, tttActive = false;
-    function initTTT(){
-      tttActive = true; tttBoard = Array(9).fill(null); tttYourTurn = true; document.getElementById('tttStatus').textContent = 'Your turn';
-      const board = document.getElementById('tttBoard'); board.innerHTML = '';
-      for (let i=0;i<9;i++) {
-        const cell = document.createElement('button'); cell.className='btn'; cell.style.width='120px'; cell.style.height='120px'; cell.style.fontSize='48px'; cell.style.borderRadius='16px';
-        cell.onclick = ()=> tttClick(i, cell); board.appendChild(cell);
-      }
-      document.getElementById('tttReset').onclick = initTTT;
-    }
-    function tttClick(i, el){ if (!tttYourTurn || tttBoard[i]) return; tttBoard[i]='X'; el.textContent='X'; tttYourTurn=false; checkTTT(); setTimeout(aiMove, 300); }
-    function aiMove(){ if (!tttActive) return; const move = bestMove(tttBoard, 'O'); if (move!=null){ tttBoard[move]='O'; const el = document.getElementById('tttBoard').children[move]; el.textContent='O'; } tttYourTurn=true; checkTTT(); }
-    function checkTTT(){
-      const w = winner(tttBoard); const status = document.getElementById('tttStatus');
-      if (w==='X'){ status.textContent='You win! +40 XP'; addXP(40,'TicTacToe'); completeMission('win_ttt'); tttActive=false; }
-      else if (w==='O'){ status.textContent='AI wins!'; tttActive=false; }
-      else if (tttBoard.every(Boolean)) { status.textContent='Draw! +15 XP'; addXP(15,'TicTacToe'); tttActive=false; }
-      else { status.textContent = tttYourTurn ? 'Your turn' : 'AI thinking…'; }
-    }
-    function lines(){ return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; }
-    function winner(b){ for (const [a,c,d] of lines()){ if (b[a] && b[a]===b[c] && b[a]===b[d]) return b[a]; } return null; }
-    function bestMove(b, me){ const opp = me==='X'?'O':'X';
-      // Win
-      for (let i=0;i<9;i++){ if(!b[i]){ b[i]=me; if (winner(b)===me){ b[i]=null; return i;} b[i]=null; } }
-      // Block
-      for (let i=0;i<9;i++){ if(!b[i]){ b[i]=opp; if (winner(b)===opp){ b[i]=null; return i;} b[i]=null; } }
-      // Center, corners, sides
-      const order = [4,0,2,6,8,1,3,5,7]; for (const i of order){ if(!b[i]) return i; }
-      return null;
-    }
-
-    /*****************
-     * Game: Snake    *
-     *****************/
-    let snakeTimer=null, snake, dir, food, score;
-    function initSnake(){
-      const cvs = document.getElementById('snakeCanvas'); const ctx = cvs.getContext('2d');
-      const size = 20; const cells = 21; // 420/20
-      snake = [{x:10,y:10}]; dir={x:1,y:0}; food = spawn(); score=0; document.getElementById('snakeScore').textContent='Score: 0';
-      function spawn(){ return {x:Math.floor(Math.random()*cells), y:Math.floor(Math.random()*cells)} }
-      function draw(){ ctx.fillStyle='#0f0e11'; ctx.fillRect(0,0,cvs.width,cvs.height);
-        // grid
-        ctx.strokeStyle='rgba(255,255,255,.05)'; for (let i=0;i<=cells;i++){ ctx.beginPath(); ctx.moveTo(i*size,0); ctx.lineTo(i*size,cvs.height); ctx.stroke(); }
-        for (let i=0;i<=cells;i++){ ctx.beginPath(); ctx.moveTo(0,i*size); ctx.lineTo(cvs.width,i*size); ctx.stroke(); }
-        // food
-        ctx.fillStyle='#9ad0ec'; ctx.fillRect(food.x*size, food.y*size, size, size);
-        // snake
-        ctx.fillStyle='#78e08f'; snake.forEach((p,i)=>{ ctx.fillRect(p.x*size, p.y*size, size, size); });
-      }
-      function step(){
-        const head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
-        if (head.x<0||head.y<0||head.x>=cells||head.y>=cells || snake.some(p=>p.x===head.x&&p.y===head.y)){
-          clearInterval(snakeTimer); addXP(20,'Snake'); toast('Game over +20 XP'); return; }
-        snake.unshift(head);
-        if (head.x===food.x && head.y===food.y){ score++; document.getElementById('snakeScore').textContent='Score: '+score; food = spawn(); addXP(5,'Snake'); if (score>=15) completeMission('score_snake'); }
-        else snake.pop();
-        draw();
-      }
-      draw(); clearInterval(snakeTimer); snakeTimer = setInterval(step, 120);
-      document.getElementById('snakeReset').onclick = initSnake;
-      window.onkeydown = e => { if (e.key==='ArrowUp'&&dir.y!==1) dir={x:0,y:-1}; else if (e.key==='ArrowDown'&&dir.y!==-1) dir={x:0,y:1}; else if (e.key==='ArrowLeft'&&dir.x!==1) dir={x:-1,y:0}; else if (e.key==='ArrowRight'&&dir.x!==-1) dir={x:1,y:0}; };
-    }
-
-    /*****************
-     * Game: Memory   *
-     *****************/
-    let memPairs = ['🍩','🎮','☕','🌧️','🌸','🧩','👾','🪴','🃏','🚀','💫','🎧'];
-    let memOpen = [], memSolved = new Set(), memStart = 0;
-    function initMemory(){
-      memOpen=[]; memSolved.clear(); memStart = Date.now();
-      const grid = document.getElementById('memGrid'); grid.innerHTML='';
-      const deck = shuffle([...memPairs, ...memPairs]);
-      deck.forEach((sym,idx)=>{
-        const btn = document.createElement('button'); btn.className='btn'; btn.style.width='80px'; btn.style.height='80px'; btn.style.fontSize='36px'; btn.dataset.sym = sym; btn.dataset.idx = idx;
-        btn.textContent = '❓'; btn.onclick = ()=> flip(btn);
-        grid.appendChild(btn);
-      });
-      document.getElementById('memStatus').textContent = 'Find all pairs!';
-      document.getElementById('memReset').onclick = initMemory;
-    }
-    function flip(btn){ if (memOpen.length===2 || memSolved.has(+btn.dataset.idx) || btn.textContent!== '❓') return; btn.textContent = btn.dataset.sym; memOpen.push(btn);
-      if (memOpen.length===2){
-        const [a,b] = memOpen; if (a.dataset.sym===b.dataset.sym){
-          memSolved.add(+a.dataset.idx); memSolved.add(+b.dataset.idx); addXP(10,'Memory');
-          memOpen=[]; if (memSolved.size===memPairs.length*2){
-            const t = Math.round((Date.now()-memStart)/1000);
-            document.getElementById('memStatus').textContent = `Done in ${t}s! +80 XP`;
-            addXP(80,'Memory'); if (t<=80) completeMission('pairs_memory');
-          }
-        } else { setTimeout(()=>{ a.textContent='❓'; b.textContent='❓'; memOpen=[]; }, 600); }
-      }
-    }
-    function shuffle(a){ for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-
-    /*****************
-     * Game: Space    *
-     *****************/
-    let spaceRAF=null;
-    function initSpace(){
-      const cvs = document.getElementById('spaceCanvas'); const ctx = cvs.getContext('2d');
-      const W=cvs.width, H=cvs.height; let ship={x: W/2, y:H-50, vx:0}, bullets=[], enemies=[], lastSpawn=0, score=0, keys={};
-      document.getElementById('spaceScore').textContent = 'Score: 0';
-      function spawn(){ enemies.push({x:20+Math.random()*(W-40), y:-20, vy:1+Math.random()*1.5, hp:2}); }
-      function draw(){ ctx.clearRect(0,0,W,H);
-        // stars
-        ctx.fillStyle='rgba(255,255,255,.08)'; for(let i=0;i<100;i++){ ctx.fillRect((i*37+Date.now()/20)%W, (i*59)%H, 2,2); }
-        // ship
-        ctx.fillStyle='#9ad0ec'; ctx.fillRect(ship.x-12, ship.y-8, 24,16);
-        // bullets
-        ctx.fillStyle='#e9b86e'; bullets.forEach(b=> ctx.fillRect(b.x-2, b.y-8, 4,8));
-        // enemies
-        ctx.fillStyle='#ff6b6b'; enemies.forEach(en=> ctx.fillRect(en.x-14, en.y-10, 28,20));
-        // HUD
-        ctx.fillStyle='rgba(255,255,255,.6)'; ctx.fillText('Use arrows to move, Space to shoot', 10, 20);
-      }
-      function step(ts){
-        if (!lastSpawn || ts-lastSpawn>900){ lastSpawn=ts; if (enemies.length<12) spawn(); }
-        // input
-        ship.vx = (keys['ArrowLeft']?-3:0) + (keys['ArrowRight']?3:0);
-        ship.x = Math.max(16, Math.min(W-16, ship.x + ship.vx));
-        if (keys['Space'] && (!bullets.length || Date.now()-bullets[bullets.length-1].t>250)) bullets.push({x:ship.x, y:ship.y-10, t:Date.now()});
-        bullets.forEach(b=> b.y -= 6);
-        enemies.forEach(en=> en.y += en.vy);
-        // collisions
-        enemies.forEach((en,ei)=>{
-          bullets.forEach((b,bi)=>{
-            if (Math.abs(en.x-b.x)<14 && Math.abs(en.y-b.y)<12){ en.hp--; bullets.splice(bi,1); score+=5; document.getElementById('spaceScore').textContent='Score: '+score; addXP(2,'Space'); }
-          });
-        });
-        enemies = enemies.filter(en=> en.hp>0 && en.y<H+20);
-        bullets = bullets.filter(b=> b.y>-20);
-        draw(); spaceRAF = requestAnimationFrame(step);
-      }
-      cancelAnimationFrame(spaceRAF); spaceRAF = requestAnimationFrame(step);
-      document.getElementById('spaceReset').onclick = initSpace;
-      window.onkeydown = e => { keys[e.code]=true; if (['ArrowLeft','ArrowRight','Space'].includes(e.code)) e.preventDefault(); };
-      window.onkeyup = e => { keys[e.code]=false; };
-    }
-
-    /*****************
-     * Boot          *
-     *****************/
-    function boot(){
-      document.getElementById('nameInput').value = state.name;
-      document.getElementById('faceSelect').value = state.face;
-      document.getElementById('faceColor').value = state.faceColor;
-      setTheme(state.theme); renderHUD(); resetMissionsIfNeeded(); renderChat(); updateLeaderboard();
-    }
+    /* ======= BOOT ======= */
+    function boot(){ q('#nameInput').value=S.name; q('#faceSelect').value=S.face; q('#faceColor').value=S.faceColor; hud(); missionResetIf(); chatRender(); lbUpdate(); }
     boot();
   </script></body>
-        </html>
+              </html>                          
+      
